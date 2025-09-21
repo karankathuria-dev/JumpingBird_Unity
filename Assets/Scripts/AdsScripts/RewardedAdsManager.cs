@@ -9,16 +9,21 @@ public class RewardedAdsManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAd
     [SerializeField] bool testMode = true;
     bool isloaded = false;
 
+    // This is the new event
+    public static event System.Action OnAdReady;
+
+
+    LifeManager lifeManager;
+
     void Start()
     {
-#if UNITY_IOS
+        #if UNITY_IOS
         adUnitId = iosAdUnitId;
-#elif UNITY_ANDROID
+        #elif UNITY_ANDROID
         adUnitId = androidAdUnitId;
-#endif
+        #endif
 
-        //Advertisement.Initialize("YOUR_GAME_ID_HERE", testMode); // replace with your actual game ID
-      //  LoadAd();
+       
     }
 
     // Load the ad
@@ -38,7 +43,7 @@ public class RewardedAdsManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAd
         else
         {
             ResumeGame();
-            Debug.Log("Ad not ready yet.");
+            Debug.Log("Ad not ready yet. under rewarded ads");
         }
     }
 
@@ -47,7 +52,11 @@ public class RewardedAdsManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAd
     {
         Debug.Log($"Ad Loaded: {adUnitId}");
         isloaded = true;
-      //  ShowAd();
+        // This line tells anyone listening that an ad is ready.
+        if (OnAdReady != null)
+        {
+            OnAdReady();
+        }
     }
 
     // Called when ad fails to load
@@ -84,7 +93,7 @@ public class RewardedAdsManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAd
         {
             Debug.Log("Reward the player!");
             isloaded = false;
-            ResumeGame();
+           // ResumeGame();
             RewardPlayer();
         }
     }
@@ -92,8 +101,14 @@ public class RewardedAdsManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAd
     private void RewardPlayer()
     {
         // Example: Increase score, give life, etc.
-        ResumeGame();
-        Debug.Log("Player rewarded!");
+        lifeManager = FindFirstObjectByType<LifeManager>();
+        if (lifeManager != null)
+        {
+            ResumeGame();
+            lifeManager.RewardPlayerWithLife();
+
+            Debug.Log("Player rewarded!");
+        }
     }
     private void PauseGame()
     {

@@ -46,14 +46,7 @@ public class LifeManager : MonoBehaviour
             hearts[i].enabled = i < currentLives;
         }
     }
-    public void GainLives()
-    {
-        if (currentLives < maxLives)
-        {
-            currentLives++;
-            UpdateLiveUI();
-        }
-    }
+    
     IEnumerator ShowLivePanel()
     {
         livePanel.SetActive(true);
@@ -72,8 +65,15 @@ public class LifeManager : MonoBehaviour
         {
             currentLives++;
             UpdateLiveUI();
-            Debug.Log("Life Gained! Current lives: " + currentLives);
+           // Debug.Log("Life Gained! Current lives: " + currentLives);
         }
+    }
+    public void RewardPlayerWithLife()
+    {
+        ResetLife();
+        gameManager.SetGameOverScreenOff();
+        UpdateLiveUI();
+
     }
 
 }

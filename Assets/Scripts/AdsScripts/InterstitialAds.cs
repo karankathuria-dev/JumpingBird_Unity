@@ -27,12 +27,12 @@ public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
        
         if (Advertisement.isInitialized && isloaded)
         {
-            PauseGame();
+           // PauseGame();
             Advertisement.Show(adUnitId, this);
         }
         else
         {
-            ResumeGame();
+           // ResumeGame();
             Debug.Log("Ad not ready yet.");
         }
     }

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private float flapForce;
     private Rigidbody2D rb;
     private bool hasStarted = false; // Tracks if the game has started
+
+    [SerializeField] GameObject tapText;
 
     void Start()
     {
@@ -47,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
     private void Flap()
     {
+        if(tapText.activeInHierarchy)
+        tapText.SetActive(false);
         rb.linearVelocity = Vector2.up * flapForce;
     }
 
