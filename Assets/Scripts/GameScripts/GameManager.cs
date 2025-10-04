@@ -16,9 +16,28 @@ public class GameManager : MonoBehaviour
 
     // Inside your GameManager class
     public GameObject continueWithAdButton;
+    public AudioSource backgroundMusic;
 
     void Start()
     {
+        // Check if the music is supposed to be on
+        bool isMusicOn = PlayerPrefs.GetInt("MusicMuted", 0) == 0;
+        if (isMusicOn)
+        {
+            // If the music is not playing, play it
+            if (!backgroundMusic.isPlaying)
+            {
+                backgroundMusic.Play();
+            }
+        }
+        else
+        {
+            // If the music is supposed to be off, stop it
+            if (backgroundMusic.isPlaying)
+            {
+                backgroundMusic.Stop();
+            }
+        }
         isGameOver = false;
         isPaused = false;
         gameOverPanel.SetActive(false);
@@ -32,6 +51,10 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         HighScoreSave();
         Time.timeScale = 0f; // Stop all movements
+        if (scoreManager.currentScore > 0)
+        {
+            PlayerPrefs.SetInt("CurrentScore",scoreManager.currentScore);
+        }
         ShowInterstitialOnGameOver();
         AdsManager.Instance.rewardedAds.LoadAd();
         gameOverPanel.SetActive(true);

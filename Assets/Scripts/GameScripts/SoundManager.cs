@@ -19,7 +19,9 @@ public class SoundManager : MonoBehaviour
 
     public void PlayButtonClick()
     {
-        if (audioSource != null && buttonClickSound != null)
+        // Check if the music is supposed to be on
+        bool isMusicOn = PlayerPrefs.GetInt("SoundMuted", 0) == 0;
+        if (audioSource != null && buttonClickSound != null && isMusicOn)
         {
             audioSource.PlayOneShot(buttonClickSound);
         }

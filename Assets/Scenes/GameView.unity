@@ -2086,6 +2086,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1637290117}
   pausePanel: {fileID: 1795305217}
   continueWithAdButton: {fileID: 828133622}
+  backgroundMusic: {fileID: 1960747791}
 --- !u!4 &1164748968
 Transform:
   m_ObjectHideFlags: 0
@@ -2227,7 +2228,6 @@ MonoBehaviour:
   androidAdUnitId: Rewarded_Android
   iosAdUnitId: Rewarded_iOS
   testMode: 0
-  lifeManager: {fileID: 1883457913}
 --- !u!1 &1177447661
 GameObject:
   m_ObjectHideFlags: 0
@@ -4261,7 +4261,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4756,7 +4756,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 48b95599a0e034445bd823ed4d216e03, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.18
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
